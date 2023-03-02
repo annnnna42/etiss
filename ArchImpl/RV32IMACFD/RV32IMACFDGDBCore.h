@@ -44,15 +44,19 @@ public:
 		/**************************************************************************
 		*   Further register should be added here to send data over gdbserver	  *
 		***************************************************************************/
+// nach oben in if
+		printf("ARRIVED in string mapRegister(unsigned index)\n");
 		}
 		return "";
 	}
 
 	unsigned mapRegister(std::string name){
+		printf("ARRIVED in unsigned mapRegister(std::string name\n");
 		return INVALIDMAPPING;
 	}
 
 	unsigned mappedRegisterCount(){
+		printf("ARRIVED in unsigned mappedRegisterCount()");
 		// Modify according to sent register number
 		return 33;
 	}
