@@ -480,6 +480,10 @@ std::shared_ptr<etiss::VirtualStruct> RV32IMACFDArch::getVirtualStruct(ETISS_CPU
 	}
 
 	ret->addField(new pcField_RV32IMACFD(*ret));
+	
+	for (uint32_t i = 33; i < 65; ++i){
+		ret->addField(new RegField_RV32IMACFD(*ret,i));
+	}
 	return ret;
 }
 

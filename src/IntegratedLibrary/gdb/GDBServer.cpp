@@ -314,7 +314,7 @@ void Server::handlePacket(bool block)
                     if (!f)
                     {
                         answer = "EFF";
-                        etiss::log(etiss::ERROR, "Faulty implementation of the GDBCore: Register not found", regname,
+                        etiss::log(etiss::ERROR, "4: Faulty implementation of the GDBCore: Register not found", regname,
                                    *plugin_core_);
                         break;
                     }
@@ -348,7 +348,7 @@ void Server::handlePacket(bool block)
                     if (!f)
                     {
                         answer = "EFF";
-                        etiss::log(etiss::ERROR, "Faulty implementation of the GDBCore: Register not found",
+                        etiss::log(etiss::ERROR, "2: Faulty implementation of the GDBCore: Register not found",
                                    arch_->getGDBCore().mapRegister(i), *plugin_core_);
                         break;
                     }
@@ -365,7 +365,7 @@ void Server::handlePacket(bool block)
                         if (!f)
                         {
                             answer = "EFF";
-                            etiss::log(etiss::ERROR, "Faulty implementation of the GDBCore: Register not found",
+                            etiss::log(etiss::ERROR, "3: Faulty implementation of the GDBCore: Register not found",
                                        regname, *plugin_core_);
                             break;
                         }
@@ -418,7 +418,7 @@ void Server::handlePacket(bool block)
                 if (!f)
                 {
                     answer = "EFF";
-                    etiss::log(etiss::ERROR, "Faulty implementation of the GDBCore: Register not found",
+                    etiss::log(etiss::ERROR, "1: Faulty implementation of the GDBCore: Register not found",
                                arch_->getGDBCore().mapRegister(regIndex), *plugin_core_);
                     break;
                 }
@@ -457,7 +457,7 @@ void Server::handlePacket(bool block)
                 if (!f)
                 {
                     answer = "EFF";
-                    etiss::log(etiss::ERROR, "Faulty implementation of the GDBCore: Register not found",
+                    etiss::log(etiss::ERROR, "5: Faulty implementation of the GDBCore: Register not found",
                                arch_->getGDBCore().mapRegister(regIndex), *plugin_core_);
                     break;
                 }

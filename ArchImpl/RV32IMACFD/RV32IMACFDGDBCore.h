@@ -34,31 +34,37 @@ class RV32IMACFDGDBCore : public etiss::plugin::gdb::GDBCore {
 public:
 	std::string mapRegister(unsigned index){
 		if (index < 32){
+		printf("mapRegister normal 0...31 index: %d \n", index);
 			std::stringstream ss;
 			ss << "X" << index;
 			return ss.str();
+		} 
+		if ((32 < index) and (index < 65)){
+		printf("mapRegister float 33...64 index: %d \n", index);
+			std::stringstream ss;
+			ss << "F" << index;
+			return ss.str();
 		}
+ 
 		switch (index){
 		case 32:
 			return "instructionPointer";
 		/**************************************************************************
 		*   Further register should be added here to send data over gdbserver	  *
 		***************************************************************************/
-// nach oben in if
-		printf("ARRIVED in string mapRegister(unsigned index)\n");
 		}
 		return "";
 	}
 
 	unsigned mapRegister(std::string name){
-		printf("ARRIVED in unsigned mapRegister(std::string name\n");
+		printf("mapRegister(std::string name\n");
 		return INVALIDMAPPING;
 	}
 
 	unsigned mappedRegisterCount(){
-		printf("ARRIVED in unsigned mappedRegisterCount()");
+		printf("mappedRegisterCount()\n");
 		// Modify according to sent register number
-		return 33;
+		return 66;
 	}
 
 	etiss::uint64 getInstructionPointer(ETISS_CPU * cpu){

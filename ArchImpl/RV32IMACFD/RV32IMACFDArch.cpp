@@ -73,7 +73,7 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
 
 
 	for (int i = 0; i < 32; ++i) {
-		rv32imacfdcpu->ins_X[i] = 0;
+		rv32imacfdcpu->ins_X[i] = 0; //ins_F auch für float reg?
 		rv32imacfdcpu->X[i] = &rv32imacfdcpu->ins_X[i];
 	}
 	for (int i = 0; i < 4096; ++i) {
@@ -122,7 +122,7 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
 	rv32imacfdcpu->PRIV = 0;
 	rv32imacfdcpu->DPC = 0;
 	rv32imacfdcpu->FCSR = 0;
-	for (int i = 0; i < 32; ++i) {
+	for (int i = 0; i < 32; ++i) { //ist das hier noch notwendig?
 		rv32imacfdcpu->F[i] = 0;
 	}
 	rv32imacfdcpu->RES_ADDR = 0;
@@ -159,7 +159,41 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
  	rv32imacfdcpu->X[29] = &rv32imacfdcpu->T4;
  	rv32imacfdcpu->X[30] = &rv32imacfdcpu->T5;
  	rv32imacfdcpu->X[31] = &rv32imacfdcpu->T6;
- 	rv32imacfdcpu->CSR[3] = &rv32imacfdcpu->FCSR;
+ 	rv32imacfdcpu->CSR[3] = &rv32imacfdcpu->FCSR; //wieso FCSR?
+ 	
+	rv32imacfdcpu->F[0] = &rv32imacfdcpu->FT0;
+ 	rv32imacfdcpu->F[1] = &rv32imacfdcpu->FT1;
+ 	rv32imacfdcpu->F[2] = &rv32imacfdcpu->FT2;
+ 	rv32imacfdcpu->F[3] = &rv32imacfdcpu->FT3;
+ 	rv32imacfdcpu->F[4] = &rv32imacfdcpu->FT4;
+ 	rv32imacfdcpu->F[5] = &rv32imacfdcpu->FT5;
+ 	rv32imacfdcpu->F[6] = &rv32imacfdcpu->FT6;
+ 	rv32imacfdcpu->F[7] = &rv32imacfdcpu->FT7;
+ 	rv32imacfdcpu->F[8] = &rv32imacfdcpu->FS0;
+ 	rv32imacfdcpu->F[9] = &rv32imacfdcpu->FS1;
+ 	rv32imacfdcpu->F[10] = &rv32imacfdcpu->FA0;
+ 	rv32imacfdcpu->F[11] = &rv32imacfdcpu->FA1;
+ 	rv32imacfdcpu->F[12] = &rv32imacfdcpu->FA2;
+ 	rv32imacfdcpu->F[13] = &rv32imacfdcpu->FA3;
+ 	rv32imacfdcpu->F[14] = &rv32imacfdcpu->FA4;
+ 	rv32imacfdcpu->F[15] = &rv32imacfdcpu->FA5;
+ 	rv32imacfdcpu->F[16] = &rv32imacfdcpu->FA6;
+ 	rv32imacfdcpu->F[17] = &rv32imacfdcpu->FA7;
+ 	rv32imacfdcpu->F[18] = &rv32imacfdcpu->FS2;
+ 	rv32imacfdcpu->F[19] = &rv32imacfdcpu->FS3;
+ 	rv32imacfdcpu->F[20] = &rv32imacfdcpu->FS4;
+ 	rv32imacfdcpu->F[21] = &rv32imacfdcpu->FS5;
+ 	rv32imacfdcpu->F[22] = &rv32imacfdcpu->FS6;
+ 	rv32imacfdcpu->F[23] = &rv32imacfdcpu->FS7;
+ 	rv32imacfdcpu->F[24] = &rv32imacfdcpu->FS8;
+ 	rv32imacfdcpu->F[25] = &rv32imacfdcpu->FS9;
+ 	rv32imacfdcpu->F[26] = &rv32imacfdcpu->FS10;
+ 	rv32imacfdcpu->F[27] = &rv32imacfdcpu->FS11;
+ 	rv32imacfdcpu->F[28] = &rv32imacfdcpu->FT8;
+ 	rv32imacfdcpu->F[29] = &rv32imacfdcpu->FT9;
+ 	rv32imacfdcpu->F[30] = &rv32imacfdcpu->FT10;
+ 	rv32imacfdcpu->F[31] = &rv32imacfdcpu->FT11;
+ 	//rv32imacfdcpu->FCSR[3] = &rv32imacfdcpu->FCSR; //was ist hiermit?
 
  	rv32imacfdcpu->PRIV = 3;
  	rv32imacfdcpu->DPC = 0;
