@@ -42,13 +42,15 @@ public:
 		if ((32 < index) and (index < 65)){
 		printf("mapRegister float 33...64 index: %d \n", index);
 			std::stringstream ss;
-			ss << "F" << index;
+			ss << "F" << (index - 33);
 			return ss.str();
 		}
  
 		switch (index){
 		case 32:
 			return "instructionPointer";
+		case 68:
+			return "CSR[3] Placeholder"; 
 		/**************************************************************************
 		*   Further register should be added here to send data over gdbserver	  *
 		***************************************************************************/

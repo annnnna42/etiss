@@ -114,10 +114,10 @@ if [ "${USE_GDB}" -eq 1 ]; then
     # gdb --args ${VP_EXE} ${ARGS}
 
     # working option to debug target
-    gdb --tui --args ${VP_EXE} ${ARGS}
+    # gdb --tui --args ${VP_EXE} ${ARGS}
 
-    # working option to debug ETISS
-    # gdbserver localhost:2000 ${VP_EXE} ${ARGS}
+    # working option to debug ETISS (and debug ETISS under target)
+    gdbserver localhost:2000 ${VP_EXE} ${ARGS}
 
 else
     ${VP_EXE} ${ARGS}

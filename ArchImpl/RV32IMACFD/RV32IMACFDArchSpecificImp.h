@@ -15,7 +15,7 @@
 	@brief VirtualStruct for RV32IMACFD architecture to faciliate register acess
 
 	@details VirtualStruct enables user to access certain register via their name without knowning ETISS hierarchy of a core.
-				Further fiels might be needed to enable gdbserver etc.
+	e diff			Further fiels might be needed to enable gdbserver etc.
 
 */
 class RegField_RV32IMACFD : public etiss::VirtualStruct::Field{
@@ -26,6 +26,16 @@ public:
 		: Field(parent,
 			std::string("X")+etiss::toString(gprid),
 			std::string("X")+etiss::toString(gprid),
+			R|W,
+			4
+		),
+		gprid_(gprid)
+	{}
+	
+	RegField_RV32IMACFD(etiss::VirtualStruct & parent,unsigned gprid, int flag)
+		: Field(parent,
+			std::string("F")+etiss::toString(gprid),
+			std::string("F")+etiss::toString(gprid),
 			R|W,
 			4
 		),

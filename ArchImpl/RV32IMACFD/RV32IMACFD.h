@@ -58,6 +58,7 @@ struct RV32IMACFD {
 	etiss_uint32 ins_CSR[4096];
 	etiss_uint64 *F[32];
 	etiss_uint32 RES_ADDR;
+	//newly added
 	etiss_uint64 FT0;
 	etiss_uint64 FT1;
  	etiss_uint64 FT2;	
