@@ -73,7 +73,7 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
 
 
 	for (int i = 0; i < 32; ++i) {
-		rv32imacfdcpu->ins_X[i] = 0; //ins_F auch für float reg?
+		rv32imacfdcpu->ins_X[i] = 0; 
 		rv32imacfdcpu->X[i] = &rv32imacfdcpu->ins_X[i];
 	}
 	for (int i = 0; i < 4096; ++i) {
@@ -122,7 +122,7 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
 	rv32imacfdcpu->PRIV = 0;
 	rv32imacfdcpu->DPC = 0;
 	rv32imacfdcpu->FCSR = 0;
-	for (int i = 0; i < 32; ++i) { //ist das hier noch notwendig?
+	for (int i = 0; i < 32; ++i) { 
 		rv32imacfdcpu->F[i] = 0;
 	}
 	rv32imacfdcpu->RES_ADDR = 0;
@@ -159,7 +159,7 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
  	rv32imacfdcpu->X[29] = &rv32imacfdcpu->T4;
  	rv32imacfdcpu->X[30] = &rv32imacfdcpu->T5;
  	rv32imacfdcpu->X[31] = &rv32imacfdcpu->T6;
- 	rv32imacfdcpu->CSR[3] = &rv32imacfdcpu->FCSR; //wieso FCSR?
+ 	rv32imacfdcpu->CSR[3] = &rv32imacfdcpu->FCSR;
  	
 	rv32imacfdcpu->F[0] = &rv32imacfdcpu->FT0;
  	rv32imacfdcpu->F[1] = &rv32imacfdcpu->FT1;
@@ -193,9 +193,13 @@ void RV32IMACFDArch::resetCPU(ETISS_CPU * cpu,etiss::uint64 * startpointer)
  	rv32imacfdcpu->F[29] = &rv32imacfdcpu->FT9;
  	rv32imacfdcpu->F[30] = &rv32imacfdcpu->FT10;
  	rv32imacfdcpu->F[31] = &rv32imacfdcpu->FT11;
- 	//rv32imacfdcpu->FCSR[3] = &rv32imacfdcpu->FCSR; //was ist hiermit?
 
- 	rv32imacfdcpu->PRIV = 3;
+ 	// lets see
+ 	//rv32imacfdcpu->CSR[0] = 0;
+// 	rv32imacfdcpu->CSR[1] = &rv32imacfdcpu->FFLAGS;
+// 	rv32imacfdcpu->CSR[2] = &rv32imacfdcpu->FRM;
+	
+	rv32imacfdcpu->PRIV = 3;
  	rv32imacfdcpu->DPC = 0;
  	*rv32imacfdcpu->CSR[0] = 11;
 	*rv32imacfdcpu->CSR[256] = 11;
@@ -251,9 +255,9 @@ etiss::plugin::gdb::GDBCore & RV32IMACFDArch::getGDBCore()
 
 const char * const reg_name[] =
 {
-	"X0",
+	"X0",  	//0
 	"X1",
-	"X2",
+	"X2"
 	"X3",
 	"X4",
 	"X5",
@@ -261,7 +265,7 @@ const char * const reg_name[] =
 	"X7",
 	"X8",
 	"X9",
-	"X10",
+	"X10",  // 10
 	"X11",
 	"X12",
 	"X13",
@@ -271,7 +275,7 @@ const char * const reg_name[] =
 	"X17",
 	"X18",
 	"X19",
-	"X20",
+	"X20",	// 20
 	"X21",
 	"X22",
 	"X23",
@@ -281,9 +285,9 @@ const char * const reg_name[] =
 	"X27",
 	"X28",
 	"X29",
-	"X30",
+	"X30",	// 30
 	"X31",
-	"PC",     //test if continuous numbering needed
+	"",     //test if continuous numbering needed
 	"F0",
 	"F1",
 	"F2",
@@ -291,7 +295,7 @@ const char * const reg_name[] =
 	"F4",
 	"F5",
 	"F6",
-	"F7",
+	"F7",	// 40
 	"F8",
 	"F9",
 	"F10",
@@ -301,7 +305,7 @@ const char * const reg_name[] =
 	"F14",
 	"F15",
 	"F16",
-	"F17",
+	"F17",	// 50
 	"F18",
 	"F19",
 	"F20",
@@ -311,11 +315,16 @@ const char * const reg_name[] =
 	"F24",
 	"F25",
 	"F26",
-	"F27",
+	"F27",	// 60
 	"F28",
 	"F29",
 	"F30",
 	"F31",
+	"CSR0", // 65
+	"CSR1", // 66
+	"CSR2", // 67
+	"CSR3", // 68 
+
 };
 
 etiss::instr::InstructionGroup ISA16_RV32IMACFD("ISA16_RV32IMACFD", 16);

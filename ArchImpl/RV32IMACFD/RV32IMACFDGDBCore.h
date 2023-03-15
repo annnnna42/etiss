@@ -45,12 +45,26 @@ public:
 			ss << "F" << (index - 33);
 			return ss.str();
 		}
- 
+
+		if ((64 < index) and (index < 69)){
+		printf("mapRegister CSR float 65...68 index: %d \n", index);
+			std::stringstream ss;
+			ss << "CSR" << (index - 65);
+			return ss.str();
+		}
+
 		switch (index){
 		case 32:
 			return "instructionPointer";
+/*		case 65:
+			return "CSR0";
+		case 66:
+			return "CSR1";
+		case 67:
+			return "CSR2";
 		case 68:
-			return "CSR[3] Placeholder"; 
+			return "CSR3"; 
+*/
 		/**************************************************************************
 		*   Further register should be added here to send data over gdbserver	  *
 		***************************************************************************/
@@ -66,7 +80,7 @@ public:
 	unsigned mappedRegisterCount(){
 		printf("mappedRegisterCount()\n");
 		// Modify according to sent register number
-		return 66;
+		return 69;
 	}
 
 	etiss::uint64 getInstructionPointer(ETISS_CPU * cpu){

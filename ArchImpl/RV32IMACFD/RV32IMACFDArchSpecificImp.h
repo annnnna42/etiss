@@ -31,17 +31,6 @@ public:
 		),
 		gprid_(gprid)
 	{}
-	
-	RegField_RV32IMACFD(etiss::VirtualStruct & parent,unsigned gprid, int flag)
-		: Field(parent,
-			std::string("F")+etiss::toString(gprid),
-			std::string("F")+etiss::toString(gprid),
-			R|W,
-			4
-		),
-		gprid_(gprid)
-	{}
-
 	RegField_RV32IMACFD(etiss::VirtualStruct & parent, std::string name, unsigned gprid)
 		: Field(parent,
 			name,
@@ -51,19 +40,44 @@ public:
 		),
 		gprid_(gprid)
 	{}
-
 	virtual ~RegField_RV32IMACFD(){}
-
 protected:
 	virtual uint64_t _read() const {
 		return (uint64_t) *((RV32IMACFD*)parent_.structure_)->X[gprid_];
 	}
-
 	virtual void _write(uint64_t val) {
 		etiss::log(etiss::VERBOSE, "write to ETISS cpu state", name_, val);
 		*((RV32IMACFD*)parent_.structure_)->X[gprid_] = (etiss_uint32) val;
 	}
 };
+
+
+
+class FloatRegField_RV32IMACFD : public etiss::VirtualStruct::Field{
+private:
+	const unsigned gprid_;
+public:
+	FloatRegField_RV32IMACFD(etiss::VirtualStruct & parent,unsigned gprid)
+		: Field(parent,
+			std::string("F")+etiss::toString(gprid),
+			std::string("F")+etiss::toString(gprid),
+			R|W,
+			4
+		),
+		gprid_(gprid)
+	{}
+	virtual ~FloatRegField_RV32IMACFD(){}
+protected:
+	virtual uint64_t _read() const {
+		return (uint64_t) *((RV32IMACFD *)parent_.structure_)->F[gprid_];
+	}
+	virtual void _write(uint64_t val) {
+		etiss::log(etiss::VERBOSE, "write to ETISS cpu state", name_, val);
+		*((RV32IMACFD*)parent_.structure_)->F[gprid_] = (etiss_uint64) val;
+	}
+};
+
+
 
 class pcField_RV32IMACFD : public etiss::VirtualStruct::Field{
 public:
@@ -75,18 +89,72 @@ public:
 			4
 		)
 	{}
-
 	virtual ~pcField_RV32IMACFD(){}
-
 protected:
 	virtual uint64_t _read() const {
 		return (uint64_t) ((ETISS_CPU *)parent_.structure_)->instructionPointer;
 	}
-
 	virtual void _write(uint64_t val) {
 		etiss::log(etiss::VERBOSE, "write to ETISS cpu state", name_, val);
 		((ETISS_CPU *)parent_.structure_)->instructionPointer = (etiss_uint32) val;
 	}
 };
+
+
+
+class CSRField_RV32IMACFD : public etiss::VirtualStruct::Field{
+private: 
+	const unsigned gprid_;
+public:
+	CSRField_RV32IMACFD(etiss::VirtualStruct & parent, unsigned gprid)
+		: Field(parent,
+			std::string("CSR")+etiss::toString(gprid),
+			std::string("CSR")+etiss::toString(gprid),
+			R|W,
+			4
+		),
+		gprid_(gprid)
+	{}
+	virtual ~CSRField_RV32IMACFD(){}
+protected:
+	virtual uint64_t _read() const {
+		return (uint64_t) *((RV32IMACFD *)parent_.structure_)->CSR[gprid_];
+	}
+	virtual void _write(uint64_t val) {
+		etiss::log(etiss::VERBOSE, "write to ETISS cpu state", name_, val);
+		*((RV32IMACFD *)parent_.structure_)->CSR[gprid_] = (etiss_uint32) val;
+	}
+};
+
+
+
+/* //  Extra Field für regnum 65
+
+class UndefinedField_RV32IMACFD : public etiss::VirtualStruct::Field{
+private: 
+	const unsigned gprid_;
+public:
+	UndefinedField_RV32IMACFD(etiss::VirtualStruct & parent, unsigned gprid)
+		: Field(parent,
+			std::string("Undefined")+etiss::toString(gprid),
+			std::string("Undefined")+etiss::toString(gprid),
+			R|W,
+			4
+		),
+		gprid_(gprid)
+	{}
+	virtual ~UndefinedField_RV32IMACFD(){}
+protected:
+	virtual uint64_t _read() const {
+		return (uint64_t) *((RV32IMACFD *)parent_.structure_)->CSR[gprid_];
+	}
+	virtual void _write(uint64_t val) {
+		etiss::log(etiss::VERBOSE, "write to ETISS cpu state", name_, val);
+		*((RV32IMACFD *)parent_.structure_)->CSR[gprid_] = (etiss_uint32) val;
+	}
+};
+*/
+
+
 
 #endif
